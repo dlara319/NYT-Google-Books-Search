@@ -22,8 +22,8 @@ class Home extends Component {
     });
   };
 
-  getBooks = () => {
-    API.getBooks(this.state.q)
+  getBooks = (q) => {
+    API.getBooks(q)
       .then(res =>
         this.setState({
           books: res.data
@@ -37,9 +37,14 @@ class Home extends Component {
       );
   };
 
+  componentDidMount() {
+    this.getBooks("mystery");
+  }
+
   handleFormSubmit = event => {
     event.preventDefault();
-    this.getBooks();
+    this.getBooks(this.state.q);
+    this.setState({q: ""});
   };
 
   handleBookSave = id => {
@@ -63,7 +68,7 @@ class Home extends Component {
           <Col size="md-12">
             <Jumbotron>
               <h1 className="text-center">
-                <strong>(React) Google Books Search</strong>
+                <strong>Google Books Search</strong>
               </h1>
               <h2 className="text-center">Search for and Save Books of Interest.</h2>
             </Jumbotron>
@@ -73,7 +78,7 @@ class Home extends Component {
               <Form
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
-                q={this.state.q}
+                value={this.state.q}
               />
             </Card>
           </Col>

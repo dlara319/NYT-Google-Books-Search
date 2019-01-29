@@ -13,18 +13,26 @@ class Saved extends Component {
   };
 
   componentDidMount() {
-    this.getSavedBooks();
+    this.getSavedBooks("mystery");
   }
 
-  getSavedBooks = () => {
-    API.getSavedBooks()
-      .then(res =>
-        this.setState({
-          books: res.data
-        })
-      )
-      .catch(err => console.log(err));
-  };
+getSavedBooks = (q) => {
+  API.getSavedBooks(q).then(res => 
+    this.setState({ books: res.data.items})) .catch( err =>
+      console.log(err));
+};  
+
+
+
+  // getSavedBooks = () => {
+  //   API.getSavedBooks()
+  //     .then(res =>
+  //       this.setState({
+  //         books: res.data
+  //       })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
   handleBookDelete = id => {
     API.deleteBook(id).then(res => this.getSavedBooks());
@@ -37,7 +45,7 @@ class Saved extends Component {
           <Col size="md-12">
             <Jumbotron>
               <h1 className="text-center">
-                <strong>(React) Google Books Search</strong>
+                <strong>Google Books Search</strong>
               </h1>
               <h2 className="text-center">Search for and Save Books of Interest.</h2>
             </Jumbotron>
