@@ -22,8 +22,8 @@ class Home extends Component {
     });
   };
 
-  getBooks = (q) => {
-    API.getBooks(q)
+  getBooks = () => {
+    API.getBooks(this.state.q)
       .then(res =>
         this.setState({
           books: res.data
@@ -37,14 +37,9 @@ class Home extends Component {
       );
   };
 
-  componentDidMount() {
-    this.getBooks("mystery");
-  }
-
   handleFormSubmit = event => {
     event.preventDefault();
-    this.getBooks(this.state.q);
-    this.setState({q: ""});
+    this.getBooks();
   };
 
   handleBookSave = id => {
@@ -78,7 +73,7 @@ class Home extends Component {
               <Form
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
-                value={this.state.q}
+                q={this.state.q}
               />
             </Card>
           </Col>

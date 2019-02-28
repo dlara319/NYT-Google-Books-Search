@@ -13,26 +13,18 @@ class Saved extends Component {
   };
 
   componentDidMount() {
-    this.getSavedBooks("mystery");
+    this.getSavedBooks();
   }
 
-getSavedBooks = (q) => {
-  API.getSavedBooks(q).then(res => 
-    this.setState({ books: res.data.items})) .catch( err =>
-      console.log(err));
-};  
-
-
-
-  // getSavedBooks = () => {
-  //   API.getSavedBooks()
-  //     .then(res =>
-  //       this.setState({
-  //         books: res.data
-  //       })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
+  getSavedBooks = () => {
+    API.getSavedBooks()
+      .then(res =>
+        this.setState({
+          books: res.data
+        })
+      )
+      .catch(err => console.log(err));
+  };
 
   handleBookDelete = id => {
     API.deleteBook(id).then(res => this.getSavedBooks());

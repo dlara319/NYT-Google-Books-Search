@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));
@@ -17,17 +17,13 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.Promise = Promise; 
-mongoose.connect("mongodb://localhost:27017", { 
-  useMongoClient: true
-});
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost:27017",
-//   {
-//     useCreateIndex: true,
-//     useNewUrlParser: true
-//   }
-// );
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/googlebooks",
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true
+  }
+);
 
 // Start the API server
 app.listen(PORT, () =>

@@ -5,7 +5,7 @@ function Footer() {
     <footer>
       <hr />
       <p className="pull-right">
-        <i className="fab fa-github" /> Built by dlara319
+        <i className="fab fa-github" /> Built By D4vidl319 <a href="https://github.com/dlara319/NYT-Google-Books-Search">GitHub Repo</a>
       </p>
     </footer>
   );
